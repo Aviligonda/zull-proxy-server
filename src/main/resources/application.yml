@@ -1,0 +1,31 @@
+server:
+  port: 8079
+spring:
+  application:
+    name: zuul-proxy
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+      instance:
+        hostname: localhost
+zuul:
+  prefix: /api
+  routes:
+    BS-USER-SERVICE:
+      path: /bsUser/**
+      url: http://localhost:8080
+    BS-CART-SERVICE:
+      path: /bsCart/**
+      url: http://localhost:8082
+    BS-ORDER-SERVICE:
+      path: /bsOrder/**
+      url: http://localhost:8083
+    BS-BOOK-SERVICE:
+      path: /bsBook/**
+      url: http://localhost:8081
+
+
+    # http://localhost:8079/api/bsUser/userService/hello --> ApiGate  link
+# http://localhost:8080/userService/hello ---> Controller link
+# without prefix also its works means without api
